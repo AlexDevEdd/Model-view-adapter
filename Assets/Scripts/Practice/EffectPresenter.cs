@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace Practice
 {
@@ -14,12 +15,25 @@ namespace Practice
             _effectView = effectView;
             _effectStorage = effectStorage;
 
-            _effectView.SetView(_effect);
-            _effectView.UpdateValue(effect.Value.CovertToString());
-            
+            SetView(effect);
+
             _effect.OnValueChanged += OnValueChanged;
             _effectStorage.OnAdded += AddedEffect;
             _effectStorage.OnRemoved += RemovedEffect;
+        }
+
+        void IDisposable.Dispose()
+        {
+            _effect.OnValueChanged -= OnValueChanged;
+            _effectStorage.OnAdded -= AddedEffect;
+            _effectStorage.OnRemoved -= RemovedEffect;
+        }
+
+        private void SetView(Effect effect)
+        {
+            _effectView.SetIcon(_effect.Icon);
+            _effectView.SetBackColor(_effect.Color);
+            _effectView.SetValue(CovertToString(effect.Value));
         }
 
         private void RemovedEffect(Effect certainEffect)
@@ -32,13 +46,8 @@ namespace Practice
             if (certainEffect == _effect) _effectView.gameObject.SetActive(true);
         }
 
-        private void OnValueChanged(float value) => _effectView.UpdateValue(value.CovertToString());
+        private void OnValueChanged(float value) => _effectView.SetValue(CovertToString(value));
 
-        void IDisposable.Dispose()
-        {
-            _effect.OnValueChanged -= OnValueChanged;
-            _effectStorage.OnAdded -= AddedEffect;
-            _effectStorage.OnRemoved -= RemovedEffect;
-        }
+        public string CovertToString(float value) => $" +{value.ToString(CultureInfo.InvariantCulture)}%";
     }
 }

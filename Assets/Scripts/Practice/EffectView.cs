@@ -13,15 +13,11 @@ namespace Practice
 
         public EffectType EffectType => _effectType;
 
-        public void SetView(Effect effect)
-        {
-            _icon.sprite = effect.Icon;
-            _valueText.text = effect.Value.ToString();
-            _background.color = effect.Color;
-        }
-        
-        public void UpdateValue(string value) 
-            => _valueText.text = value;
+        public void SetIcon(Sprite icon) => _icon.sprite = icon;
+
+        public void SetBackColor(Color backColor) => _background.color = backColor;
+
+        public void SetValue(string value) => _valueText.text = value;
     }
     
     
