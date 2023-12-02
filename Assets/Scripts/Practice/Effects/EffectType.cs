@@ -1,4 +1,4 @@
-﻿namespace Practice
+﻿namespace Practice.Effects
 {
     public enum EffectType : byte
     {

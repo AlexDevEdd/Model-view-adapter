@@ -1,62 +1,47 @@
-﻿using System;
+﻿using Practice.Effects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
-using static Practice.ActionType;
-using static Practice.EffectType;
+using static Practice.Effects.EffectType;
 
 namespace Practice
 {
-    public enum ActionType
-    {
-        ApplyEffect,
-        RemoveEffect
-    }
-    
     public sealed class TestAddRemoveEffects : MonoBehaviour
     {
-        private EffectManager _manager;
+        private EffectSystem _effectSystem;
 
         [Inject]
-        public void Construct(EffectManager manager)
+        public void Construct(EffectSystem effectSystem)
         {
-            _manager = manager;
+            _effectSystem = effectSystem;
         }
 
-        private void Start() => ShowDemo();
-
-        private void ShowDemo()
-        {
-            _manager.ApplyEffect(Energy);
-            _manager.ApplyEffect(Attack);
-            _manager.ApplyEffect(Money);
-        }
-
-        [Button]
-        public void EffectOnEnergy(ActionType type = ApplyEffect)
-        {
-            if (type == ApplyEffect)
-                _manager.ApplyEffect(Energy);
-            else
-                _manager.RemoveEffect(Energy);
-        }
-
-        [Button]
-        public void EffectOnAttack(ActionType type = ApplyEffect)
-        {
-            if (type == ApplyEffect)
-                _manager.ApplyEffect(Attack);
-            else
-                _manager.RemoveEffect(Attack);
-        }
-
-        [Button]
-        public void EffectOnMoney(ActionType type = ApplyEffect)
-        {
-            if (type == ApplyEffect)
-                _manager.ApplyEffect(Money);
-            else
-                _manager.RemoveEffect(Money);
-        }
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
+        public void TryCreateOrAddEnergy() 
+            => _effectSystem.TryApplyOrCreateEffect(Energy);
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
+        public void TryCreateOrAddAttack() 
+            => _effectSystem.TryApplyOrCreateEffect(Attack);
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
+        public void TryCreateOrAddMoney() 
+            => _effectSystem.TryApplyOrCreateEffect(Money);
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
+            IconAlignment = IconAlignment.LeftOfText )]
+        public void RemoveEnergy() 
+            => _effectSystem.TryRemoveEffect(Energy);
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
+            IconAlignment = IconAlignment.LeftOfText )]
+        public void RemoveAttack() 
+            => _effectSystem.TryRemoveEffect(Attack);
+        
+        [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
+            IconAlignment = IconAlignment.LeftOfText )]
+        public void RemoveMoney() 
+            => _effectSystem.TryRemoveEffect(Money);
     }
 }

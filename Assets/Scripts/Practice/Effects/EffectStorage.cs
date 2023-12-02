@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Practice
+namespace Practice.Effects
 {
     public sealed class EffectStorage
     {
@@ -14,23 +14,17 @@ namespace Practice
         
         public void AddEffect(Effect effect)
         {
-            if (_effects.Add(effect))
-            {
+            if (_effects.Add(effect)) 
                 OnAdded?.Invoke(effect);
-            }
         }
         
         public void RemoveEffect(Effect effect)
         {
-            if (_effects.Remove(effect))
-            {
+            if (_effects.Remove(effect)) 
                 OnRemoved?.Invoke(effect);
-            }
         }
 
-        public IEnumerable<Effect> GetEffects()
-        {
-            return this._effects;
-        }
+        public IEnumerable<Effect> GetEffects() 
+            => _effects;
     }
 }

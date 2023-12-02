@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3642dd31d5b17439df18660242b9b9, type: 3}
+  m_Name: GameResourcesInstaller
+  m_EditorClassIdentifier: 
+  _gameResources:
+    _icons:
+    - {fileID: 21300000, guid: 7edf5a90009bacb4ca4ebb329aeecb8d, type: 3}
+    - {fileID: 21300000, guid: e3ea6bdec38940548a55158705cb997c, type: 3}
+    - {fileID: 21300000, guid: 9490a1c41ab787240aa49c55718de190, type: 3}
+    _placeholder: {fileID: 21300000, guid: e3ea6bdec38940548a55158705cb997c, type: 3}
+    EffectPrefab: {fileID: 4634553809201955014, guid: 759e449b9390bf84c8af7c74847fa0db,
+      type: 3}
