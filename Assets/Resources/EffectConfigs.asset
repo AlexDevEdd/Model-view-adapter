@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EffectConfig:
   - Type: 0
-    Value: 20
+    InitValue: 20
     IncreaseValue: 13
     Icon: {fileID: 21300000, guid: e3ea6bdec38940548a55158705cb997c, type: 3}
     Color: {r: 0.06915272, g: 0.39381048, b: 0.6981132, a: 1}
   - Type: 1
-    Value: 30
+    InitValue: 30
     IncreaseValue: 26
     Icon: {fileID: 21300000, guid: 9490a1c41ab787240aa49c55718de190, type: 3}
     Color: {r: 0.19345999, g: 0.6132076, b: 0.06074226, a: 1}
   - Type: 2
-    Value: 50
+    InitValue: 50
     IncreaseValue: 35
     Icon: {fileID: 21300000, guid: 7edf5a90009bacb4ca4ebb329aeecb8d, type: 3}
     Color: {r: 0.6415094, g: 0.021181926, b: 0.021181926, a: 1}

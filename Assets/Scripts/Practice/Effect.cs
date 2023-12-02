@@ -18,8 +18,7 @@ namespace Practice
             OnValueChanged?.Invoke(Value);
         }
 
-        public void IncreaseConstantly() 
-            => SetValue(Value + IncreaseValue);
+        public void IncreaseEffectValue() => SetValue(Value + IncreaseValue);
 
         public Effect(float value, float increaseValue, Sprite icon, Color color)
         {

@@ -7,18 +7,18 @@ namespace Practice
     public sealed class EffectInstaller : MonoInstaller
     {
         [SerializeField] private EffectProvider _effectProvider;
-        [SerializeField] private EffectConfigs _effectConfigs;
+        [SerializeField] private EffectConfigsSO _effectConfigs;
         
         private EffectStorage _effectStorage;
-        private EffectFactory _effectFactory;
+        private EffectManager _effectManager;
         
         public override void InstallBindings()
         {
             BindEffectStorage();
             BindEffectFactory();
-            BindAttackAdapter();
-            BindMoneyAdapter();
-            BindEnergyAdapter();
+            // BindAttackAdapter();
+            // BindMoneyAdapter();
+            // BindEnergyAdapter();
         }
         
         private void BindEffectStorage()
@@ -31,40 +31,42 @@ namespace Practice
 
         private void BindEffectFactory()
         {
-            _effectFactory = new EffectFactory(_effectConfigs);
-             Container.Bind<EffectFactory>().FromInstance(_effectFactory)
+            _effectManager = new EffectManager(_effectConfigs, _effectStorage,_effectProvider);
+             Container.Bind<EffectManager>().FromInstance(_effectManager)
                 .AsSingle()
                 .NonLazy();
         } 
         
-        private void BindAttackAdapter()
-        {
-            var effect = _effectFactory.Create(EffectType.Attack);
-            _effectStorage.AddEffect(effect);
-            Container.Bind<EffectPresenter>()
-                .AsTransient()
-                .WithArguments(effect, _effectProvider.AttackView)
-                .NonLazy();
-        }
-        
-        private void BindMoneyAdapter()
-        {
-            var effect = _effectFactory.Create(EffectType.Money);
-            _effectStorage.AddEffect(effect);
-            Container.Bind<EffectPresenter>()
-                .AsTransient()
-                .WithArguments(effect, _effectProvider.MoneyView)
-                .NonLazy();
-        }
-        
-        private void BindEnergyAdapter()
-        {
-            var effect = _effectFactory.Create(EffectType.Energy);
-            _effectStorage.AddEffect(effect);
-            Container.Bind<EffectPresenter>()
-                .AsTransient()
-                .WithArguments(effect, _effectProvider.Energy)
-                .NonLazy();
-        }
+        // private void BindAttackAdapter()
+        // {
+        //     _effectManager.ApplyEffect(EffectType.Attack);
+        //     
+        //     var effect = _effectManager.ApplyEffect(EffectType.Attack);
+        //     _effectStorage.AddEffect(effect);
+        //     Container.Bind<EffectPresenter>()
+        //         .AsTransient()
+        //         .WithArguments(effect, _effectProvider.AttackView)
+        //         .NonLazy();
+        // }
+        //
+        // private void BindMoneyAdapter()
+        // {
+        //     var effect = _effectManager.ApplyEffect(EffectType.Money);
+        //     _effectStorage.AddEffect(effect);
+        //     Container.Bind<EffectPresenter>()
+        //         .AsTransient()
+        //         .WithArguments(effect, _effectProvider.MoneyView)
+        //         .NonLazy();
+        // }
+        //
+        // private void BindEnergyAdapter()
+        // {
+        //     var effect = _effectManager.ApplyEffect(EffectType.Energy);
+        //     _effectStorage.AddEffect(effect);
+        //     Container.Bind<EffectPresenter>()
+        //         .AsTransient()
+        //         .WithArguments(effect, _effectProvider.Energy)
+        //         .NonLazy();
+        // }
     }
 }

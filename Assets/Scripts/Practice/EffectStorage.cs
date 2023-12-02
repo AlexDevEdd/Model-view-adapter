@@ -15,7 +15,7 @@ namespace Practice
         public void AddEffect(Effect effect)
         {
             if (!_effects.Add(effect))
-                effect.IncreaseConstantly();
+                effect.IncreaseEffectValue();
             
             OnAdded?.Invoke(effect);
         }
