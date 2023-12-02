@@ -10,36 +10,28 @@ namespace Practice
         private readonly EffectConfigsSO _configs;
         private readonly EffectStorage _effectStorage;
         private readonly Dictionary<EffectType, Effect> _effects = new();
+        private List<EffectPresenter> _presenters = new ();
+        private EffectViewProvider _effectProvider;
 
-        public EffectManager(EffectConfigsSO configs, EffectStorage effectStorage)
+        public EffectManager(EffectConfigsSO configs, EffectStorage effectStorage, EffectViewProvider effectProvider)
         {
             _configs = configs;
             _effectStorage = effectStorage;
+            _effectProvider = effectProvider;
         }
-        
-        // public void ApplyEffect(EffectType type)
-        // {
-        //     if (!_effects.TryGetValue(type, out var effect))
-        //     {
-        //         effect = CreateEffect(type);
-        //         _presenters.Add(new EffectPresenter(effect, _effectProvider.GetEffectView(type), _effectStorage));
-        //     }
-        //     _effectStorage.AddEffect(effect);
-        // }
 
         public void ApplyEffect(EffectType type)
         {
-            if (_effects.TryGetValue(type, out var effect))
+            if (!_effects.TryGetValue(type, out var effect))
             {
-                if (_effectStorage.GetEffects().Contains(effect))
-                    effect.IncreaseEffectValue();
-                else
-                    _effectStorage.AddEffect(effect);
+                effect = CreateEffect(type);
+                _presenters.Add(new EffectPresenter(effect, _effectProvider.GetEffectView(type), _effectStorage));
             }
+            
+            if (_effectStorage.GetEffects().Contains(effect))
+                effect.IncreaseEffectValue();
             else
-            {
-                Debug.LogError($"[EffectManager]: Can't Apply [{type}] Effect< because it is not initialized");
-            }
+                _effectStorage.AddEffect(effect);
         }
         
         public Effect CreateEffect(EffectType type)
