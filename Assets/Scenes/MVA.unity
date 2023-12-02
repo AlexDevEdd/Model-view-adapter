@@ -659,8 +659,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01f43a4461d45f092d88fae0140b419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectProvider: {fileID: 1367377626}
   _effectConfigs: {fileID: 11400000, guid: 251f21829f8ba594ca298e22122a8798, type: 2}
+  _effectViews:
+  - {fileID: 1510577525}
+  - {fileID: 752014694}
+  - {fileID: 2125884991}
 --- !u!1 &752014692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,57 +1104,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &1367377624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1367377625}
-  - component: {fileID: 1367377626}
-  m_Layer: 0
-  m_Name: EffectProvider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1367377625
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367377624}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2071697265}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1367377626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367377624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f306b017d41244b198e2239a67c14397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _effectViews:
-  - {fileID: 1510577525}
-  - {fileID: 752014694}
-  - {fileID: 2125884991}
-  _attackView: {fileID: 1510577525}
-  _moneyView: {fileID: 752014694}
-  _energyView: {fileID: 2125884991}
 --- !u!1 &1510577523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1802,7 +1754,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 700802537}
-  - {fileID: 1367377625}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

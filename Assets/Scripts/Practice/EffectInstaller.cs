@@ -1,15 +1,13 @@
 ﻿using Practice.ScriptableObjects;
 using UnityEngine;
 using Zenject;
-using static Practice.EffectType;
 
 namespace Practice
 {
     public sealed class EffectInstaller : MonoInstaller
     {
-        [SerializeField] private EffectViewProvider _effectProvider;
         [SerializeField] private EffectConfigsSO _effectConfigs;
-        
+        [SerializeField] private EffectView[] _effectViews;
         private EffectStorage _effectStorage;
         private EffectManager _effectManager;
         
@@ -17,7 +15,7 @@ namespace Practice
         {
             BindEffectStorage();
             BindEffectFactory();
-            BindEffectAdapters();
+            BindViewEffect();
         }
 
         private void BindEffectStorage()
@@ -30,28 +28,26 @@ namespace Practice
 
         private void BindEffectFactory()
         {
-            _effectManager = new EffectManager(_effectConfigs, _effectStorage,_effectProvider);
+            _effectManager = new EffectManager(_effectConfigs, _effectStorage);
              Container.Bind<EffectManager>().FromInstance(_effectManager)
                 .AsSingle()
                 .NonLazy();
         }
 
-        private void BindEffectAdapters()
+        private void BindViewEffect()
         {
-            EffectViewProvider effectViewProvider = FindObjectOfType<EffectViewProvider>();
-            effectViewProvider.Init();
-            foreach (EffectType type in effectViewProvider.GetEffectTypes())
+            foreach (EffectView view in _effectViews)
             {
-                BindEffectAdapter(type);
+                BindEffectAdapter(view.EffectType, view);
             }
         }
 
-        private void BindEffectAdapter(EffectType effectType)
+        private void BindEffectAdapter(EffectType effectType, EffectView effectView)
         {
             var effect = _effectManager.CreateEffect(effectType);
             Container.Bind<EffectPresenter>()
                 .AsTransient()
-                .WithArguments(effect, _effectProvider.GetEffectView(effectType),_effectStorage).NonLazy();
+                .WithArguments(effect, effectView,_effectStorage).NonLazy();
         }
     }
 }
