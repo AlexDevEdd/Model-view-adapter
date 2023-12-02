@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Practice.ScriptableObjects;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Practice
         private readonly EffectStorage _effectStorage;
         private readonly EffectViewProvider _effectProvider;
         private readonly Dictionary<EffectType, Effect> _effects = new();
-        private readonly List<EffectPresenter> _presenters = new ();
+        //private readonly List<EffectPresenter> _presenters = new ();
 
         public EffectManager(EffectConfigsSO configs, EffectStorage effectStorage, EffectViewProvider effectProvider)
         {
@@ -19,17 +20,32 @@ namespace Practice
             _effectProvider = effectProvider;
         }
         
+        // public void ApplyEffect(EffectType type)
+        // {
+        //     if (!_effects.TryGetValue(type, out var effect))
+        //     {
+        //         effect = CreateEffect(type);
+        //         _presenters.Add(new EffectPresenter(effect, _effectProvider.GetEffectView(type), _effectStorage));
+        //     }
+        //     _effectStorage.AddEffect(effect);
+        // }
+
         public void ApplyEffect(EffectType type)
         {
-            if (!_effects.TryGetValue(type, out var effect))
+            if (_effects.TryGetValue(type, out var effect))
             {
-                effect = CreateEffect(type);
-                _presenters.Add(new EffectPresenter(effect, _effectProvider.GetEffectView(type), _effectStorage));
+                if (_effectStorage.GetEffects().Contains(effect))
+                    effect.IncreaseEffectValue();
+                else
+                    _effectStorage.AddEffect(effect);
             }
-            _effectStorage.AddEffect(effect);
+            else
+            {
+                Debug.LogError($"[EffectManager]: Can't Apply [{type}] Effect< because it is not initialized");
+            }
         }
-
-        private Effect CreateEffect(EffectType type)
+        
+        public Effect CreateEffect(EffectType type)
         {
             var config = _configs.GetConfigByType(type);
             var effect = new Effect(config.InitValue, config.IncreaseValue, config.Icon, config.Color);

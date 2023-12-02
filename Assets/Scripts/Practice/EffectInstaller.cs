@@ -1,6 +1,7 @@
 ﻿using Practice.ScriptableObjects;
 using UnityEngine;
 using Zenject;
+using static Practice.EffectType;
 
 namespace Practice
 {
@@ -16,11 +17,9 @@ namespace Practice
         {
             BindEffectStorage();
             BindEffectFactory();
-            // BindAttackAdapter();
-            // BindMoneyAdapter();
-            // BindEnergyAdapter();
+            BindEffectAdapters();
         }
-        
+
         private void BindEffectStorage()
         {
             _effectStorage = new EffectStorage();
@@ -35,38 +34,24 @@ namespace Practice
              Container.Bind<EffectManager>().FromInstance(_effectManager)
                 .AsSingle()
                 .NonLazy();
-        } 
-        
-        // private void BindAttackAdapter()
-        // {
-        //     _effectManager.ApplyEffect(EffectType.Attack);
-        //     
-        //     var effect = _effectManager.ApplyEffect(EffectType.Attack);
-        //     _effectStorage.AddEffect(effect);
-        //     Container.Bind<EffectPresenter>()
-        //         .AsTransient()
-        //         .WithArguments(effect, _effectProvider.AttackView)
-        //         .NonLazy();
-        // }
-        //
-        // private void BindMoneyAdapter()
-        // {
-        //     var effect = _effectManager.ApplyEffect(EffectType.Money);
-        //     _effectStorage.AddEffect(effect);
-        //     Container.Bind<EffectPresenter>()
-        //         .AsTransient()
-        //         .WithArguments(effect, _effectProvider.MoneyView)
-        //         .NonLazy();
-        // }
-        //
-        // private void BindEnergyAdapter()
-        // {
-        //     var effect = _effectManager.ApplyEffect(EffectType.Energy);
-        //     _effectStorage.AddEffect(effect);
-        //     Container.Bind<EffectPresenter>()
-        //         .AsTransient()
-        //         .WithArguments(effect, _effectProvider.Energy)
-        //         .NonLazy();
-        // }
+        }
+
+        private void BindEffectAdapters()
+        {
+            EffectViewProvider effectViewProvider = FindObjectOfType<EffectViewProvider>();
+            effectViewProvider.Init();
+            foreach (EffectType type in effectViewProvider.GetEffectTypes())
+            {
+                BindEffectAdapter(type);
+            }
+        }
+
+        private void BindEffectAdapter(EffectType effectType)
+        {
+            var effect = _effectManager.CreateEffect(effectType);
+            Container.Bind<EffectPresenter>()
+                .AsTransient()
+                .WithArguments(effect, _effectProvider.GetEffectView(effectType),_effectStorage).NonLazy();
+        }
     }
 }
