@@ -28,7 +28,10 @@ namespace Practice.Core
             for (var i = 0; i < _size; i++)
             {
                 if (_container == null)
-                    _container = Object.Instantiate(new GameObject($"{typeof(T)}s"), root).transform;
+                {
+                    _container = new GameObject($"{typeof(T)}s").transform;
+                    _container.SetParent(root);
+                }
 
                 var obj = CreateObj();
                 HIde(obj);
