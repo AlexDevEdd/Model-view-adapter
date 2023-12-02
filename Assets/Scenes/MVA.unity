@@ -712,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ac9131df546dc9211f81732b547cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectType: 2
   _icon: {fileID: 122867697}
   _background: {fileID: 422062289}
   _valueText: {fileID: 595773889}
@@ -726,7 +727,7 @@ GameObject:
   - component: {fileID: 763522050}
   - component: {fileID: 763522049}
   m_Layer: 0
-  m_Name: TestAddEffects
+  m_Name: TestAddRemoveEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1144,6 +1145,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f306b017d41244b198e2239a67c14397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectViews:
+  - {fileID: 1510577525}
+  - {fileID: 752014694}
+  - {fileID: 2125884991}
   _attackView: {fileID: 1510577525}
   _moneyView: {fileID: 752014694}
   _energyView: {fileID: 2125884991}
@@ -1198,6 +1203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ac9131df546dc9211f81732b547cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectType: 0
   _icon: {fileID: 1997074202}
   _background: {fileID: 368924178}
   _valueText: {fileID: 1039026856}
@@ -1851,6 +1857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35ac9131df546dc9211f81732b547cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectType: 1
   _icon: {fileID: 869623495}
   _background: {fileID: 1523797389}
   _valueText: {fileID: 1791607047}

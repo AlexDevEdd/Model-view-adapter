@@ -18,16 +18,16 @@ namespace Practice
             _effectView.UpdateValue(effect.Value.CovertToString());
             
             _effect.OnValueChanged += OnValueChanged;
-            _effectStorage.OnAdded += ShowEffect;
-            _effectStorage.OnRemoved += RemoveEffect;
+            _effectStorage.OnAdded += AddedEffect;
+            _effectStorage.OnRemoved += RemovedEffect;
         }
 
-        private void RemoveEffect(Effect certainEffect)
+        private void RemovedEffect(Effect certainEffect)
         {
             if (certainEffect == _effect) _effectView.gameObject.SetActive(false);
         }
 
-        private void ShowEffect(Effect certainEffect)
+        private void AddedEffect(Effect certainEffect)
         {
             if (certainEffect == _effect) _effectView.gameObject.SetActive(true);
         }
@@ -37,8 +37,8 @@ namespace Practice
         void IDisposable.Dispose()
         {
             _effect.OnValueChanged -= OnValueChanged;
-            _effectStorage.OnAdded -= ShowEffect;
-            _effectStorage.OnRemoved -= RemoveEffect;
+            _effectStorage.OnAdded -= AddedEffect;
+            _effectStorage.OnRemoved -= RemovedEffect;
         }
     }
 }

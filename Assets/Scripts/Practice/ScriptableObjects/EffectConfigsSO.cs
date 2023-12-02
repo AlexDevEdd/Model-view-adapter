@@ -12,8 +12,7 @@ namespace Practice.ScriptableObjects
         [Title("Effect configuration", TitleAlignment = TitleAlignments.Centered)]
         public List<EffectConfig> EffectConfig;
 
-        public EffectConfig GetConfigByType(EffectType type)
-            => EffectConfig.FirstOrDefault(e => e.Type == type);
+        public EffectConfig GetConfigByType(EffectType type) => EffectConfig.FirstOrDefault(e => e.Type == type);
 
         public float GetInitValueByType(EffectType type) => EffectConfig.FirstOrDefault(e => e.Type == type).InitValue;
     }

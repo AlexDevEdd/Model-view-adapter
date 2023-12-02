@@ -6,7 +6,7 @@ namespace Practice
 {
     public sealed class EffectInstaller : MonoInstaller
     {
-        [SerializeField] private EffectProvider _effectProvider;
+        [SerializeField] private EffectViewProvider _effectProvider;
         [SerializeField] private EffectConfigsSO _effectConfigs;
         
         private EffectStorage _effectStorage;

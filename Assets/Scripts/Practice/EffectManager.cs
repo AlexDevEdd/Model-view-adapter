@@ -8,11 +8,11 @@ namespace Practice
     {
         private readonly EffectConfigsSO _configs;
         private readonly EffectStorage _effectStorage;
-        private readonly EffectProvider _effectProvider;
+        private readonly EffectViewProvider _effectProvider;
         private readonly Dictionary<EffectType, Effect> _effects = new();
-        private List<EffectPresenter> _presenters = new ();
+        private readonly List<EffectPresenter> _presenters = new ();
 
-        public EffectManager(EffectConfigsSO configs, EffectStorage effectStorage, EffectProvider effectProvider)
+        public EffectManager(EffectConfigsSO configs, EffectStorage effectStorage, EffectViewProvider effectProvider)
         {
             _configs = configs;
             _effectStorage = effectStorage;
