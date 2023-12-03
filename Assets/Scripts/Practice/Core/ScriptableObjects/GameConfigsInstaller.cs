@@ -11,6 +11,7 @@ namespace Practice.Core.ScriptableObjects
         public override void InstallBindings() 
             => Container.BindInterfacesAndSelfTo<GameConfigs>()
                 .FromInstance(configs)
-                .AsSingle();
+                .AsSingle()
+                .NonLazy();
     }
 }

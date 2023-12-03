@@ -15,7 +15,6 @@ namespace Practice
         {
             _effectSystem = effectSystem;
         }
-
         
         [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
         public void TryCreateOrAddEnergy() 
