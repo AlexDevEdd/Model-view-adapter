@@ -46,7 +46,7 @@ namespace Practice.Effects
 
         private void OnValueChanged(float value)
             => _effectView.SetValue(CovertToString(value));
-
+        
         private string CovertToString(float value)
             => $" +{value.ToString(CultureInfo.InvariantCulture)}%";
 

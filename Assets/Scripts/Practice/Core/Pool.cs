@@ -76,18 +76,24 @@ namespace Practice.Core
 
         private void HIde(T obj)
         {
-            obj.gameObject.SetActive(false);
-            obj.gameObject.transform.SetParent(_container);
+            Enable(obj,false);
+            SetParent(obj, _container);
         }
         
         private void Show(T obj)
         {
             _actives.Add(obj);
             if(_parent != null)
-                obj.gameObject.transform.SetParent(_parent);
+                SetParent(obj, _parent);
             
-            obj.gameObject.SetActive(true);
+            Enable(obj,true);
         }
+
+        private void SetParent(T obj, Transform parent) 
+            => obj.gameObject.transform.SetParent(parent);
+
+        private void Enable(T obj, bool flag)
+        =>  obj.gameObject.SetActive(flag);
         
         private T CreateObj()
             => Object.Instantiate(_prefab, _container);
