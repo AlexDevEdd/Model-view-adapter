@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using UnityEngine;
 
 namespace Practice.Effects
@@ -11,16 +10,7 @@ namespace Practice.Effects
         public float IncreaseValue { get; }
         public Sprite Icon { get; }
         public Color Color { get; }
-    
-        public void SetValue(float value)
-        {
-            Value = value;
-            OnValueChanged?.Invoke(Value);
-        }
-
-        public void IncreaseEffectValue()
-            => SetValue(Value + IncreaseValue);
-
+        
         public Effect(float value, float increaseValue, Sprite icon, Color color)
         {
             Value = value;
@@ -28,5 +18,14 @@ namespace Practice.Effects
             Icon = icon;
             Color = color;
         }
+        
+        public void SetValue(float value)
+        {
+            Value = value;
+            OnValueChanged?.Invoke(Value);
+        }
+
+        public void IncreaseEffectValue() 
+            => SetValue(Value + IncreaseValue);
     }
 }

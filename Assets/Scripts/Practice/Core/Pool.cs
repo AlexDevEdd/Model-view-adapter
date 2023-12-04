@@ -92,10 +92,10 @@ namespace Practice.Core
         private void SetParent(T obj, Transform parent) 
             => obj.gameObject.transform.SetParent(parent);
 
-        private void Enable(T obj, bool flag)
-        =>  obj.gameObject.SetActive(flag);
-        
-        private T CreateObj()
+        private void Enable(T obj, bool flag) 
+            => obj.gameObject.SetActive(flag);
+
+        private T CreateObj() 
             => Object.Instantiate(_prefab, _container);
     }
 }

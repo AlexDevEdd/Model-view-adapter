@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Practice.Core.Interfaces;
 using Practice.Tools;
 
@@ -6,6 +7,9 @@ namespace Practice.Effects
 {
     public sealed class EffectSystem
     {
+        public event Action<Effect> OnEffectAdded;
+        public event Action<Effect> OnEffectRemoved;
+        
         private readonly EffectFactory _effectFactory;
 
         private readonly Dictionary<EffectType, IEffectPresenter> _effects = new();
@@ -20,7 +24,7 @@ namespace Practice.Effects
             if (!_effects.TryGetValue(type, out var effect)) 
                 CreateEffect(type);
             else
-                effect.Effect.IncreaseEffectValue();
+                effect.IncreaseEffectValue();
         }
         
         public void TryRemoveEffect(EffectType type)
@@ -36,13 +40,15 @@ namespace Practice.Effects
         {
             var effect = _effectFactory.CreateEffect(type);
             _effects.Add(type, effect);
+            OnEffectAdded?.Invoke(effect.GetEffect());
         }
         
         private void RemoveEffect(EffectType type, IEffectPresenter effect)
         {
-            effect.Dispose();
             _effectFactory.RemoveEffect(effect);
             _effects.Remove(type);
+            OnEffectRemoved?.Invoke(effect.GetEffect());
+            effect.Dispose();
         }
     }
 }

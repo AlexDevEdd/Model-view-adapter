@@ -11,25 +11,23 @@ namespace Practice.Core.Installers
         
         public override void InstallBindings()
         {
-            BindEffectStorage();
             BindEffectFactory();
             BindEffectSystem();
         }
-
-        private void BindEffectStorage() =>
-            Container.Bind<EffectStorage>()
-                .AsSingle()
-                .NonLazy();
-
-        private void BindEffectFactory() 
-            => Container.Bind<EffectFactory>()
+        
+        private void BindEffectFactory()
+        {
+            Container.Bind<EffectFactory>()
                 .AsSingle()
                 .WithArguments(_viewRoot, _viewParent)
                 .NonLazy();
-        
-        private void BindEffectSystem() 
-            => Container.Bind<EffectSystem>()
+        }
+
+        private void BindEffectSystem()
+        {
+            Container.Bind<EffectSystem>()
                 .AsSingle()
                 .NonLazy();
+        }
     }
 }

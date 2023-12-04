@@ -8,10 +8,12 @@ namespace Practice.Core.ScriptableObjects
     {
        [SerializeField] private GameConfigs configs;
        
-        public override void InstallBindings() 
-            => Container.BindInterfacesAndSelfTo<GameConfigs>()
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<GameConfigs>()
                 .FromInstance(configs)
                 .AsSingle()
                 .NonLazy();
+        }
     }
 }
