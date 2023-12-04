@@ -9,17 +9,13 @@ namespace Practice.Effects
     public sealed class EffectFactory
     {
         private const int POOL_SIZE = 10;
-
-        private readonly EffectStorage _effectStorage;
-        private readonly GameConfigs _configs;
         
+        private readonly GameConfigs _configs;
         private readonly Pool<EffectView> _pool;
 
-        public EffectFactory(EffectStorage effectStorage, GameConfigs configs,
-            GameResources resources, Transform container, Transform parent)
+        public EffectFactory(GameConfigs configs, GameResources resources, Transform container, Transform parent)
         {
             _configs = configs;
-            _effectStorage = effectStorage;
             _pool = new Pool<EffectView>(resources.EffectPrefab, POOL_SIZE, container, parent);
         }
 
@@ -28,26 +24,22 @@ namespace Practice.Effects
             var config = GetConfigByType(type);
             var effect = CreateEffect(config);
             var view = SpawnView();
-            _effectStorage.AddEffect(effect);
-            return CreatePresenter(effect, view, _effectStorage);
+            return CreatePresenter(effect, view);
         }
 
-        public void RemoveEffect(IEffectPresenter effect)
-        {
-            _effectStorage.RemoveEffect(effect.Effect); 
-            _pool.DeSpawn(effect.View);
-        } 
+        public void RemoveEffect(IEffectPresenter effect) 
+            => _pool.DeSpawn(effect.GetEffectView());
 
         private EffectView SpawnView() 
             => _pool.Spawn();
 
-        private IEffectPresenter CreatePresenter(Effect effect, EffectView view, EffectStorage storage) =>
-            new EffectPresenter(effect, view, storage);
-        
-        private Effect CreateEffect(EffectConfig config) =>
-            new(config.InitValue, config.IncreaseValue, config.Icon, config.Color);
+        private IEffectPresenter CreatePresenter(Effect effect, EffectView view)
+            => new EffectPresenter(effect, view);
 
-        private EffectConfig GetConfigByType(EffectType type)
+        private Effect CreateEffect(EffectConfig config)
+            => new(config.InitValue, config.IncreaseValue, config.Icon, config.Color);
+
+        private EffectConfig GetConfigByType(EffectType type) 
             => _configs.EffectConfigs.GetConfigByType(type);
     }
 }

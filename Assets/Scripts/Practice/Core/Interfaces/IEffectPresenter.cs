@@ -1,11 +1,13 @@
+using System;
 using Practice.Effects;
 
 namespace Practice.Core.Interfaces
 {
-    public interface IEffectPresenter
+    public interface IEffectPresenter : IDisposable
     {
-        public Effect Effect { get; }
-        public EffectView View { get; }
+        public EffectView GetEffectView();
+        public Effect GetEffect();
+        public void IncreaseEffectValue();
         public void Dispose();
     }
 }

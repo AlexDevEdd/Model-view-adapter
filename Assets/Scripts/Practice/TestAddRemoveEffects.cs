@@ -19,25 +19,25 @@ namespace Practice
         [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
         public void TryCreateOrAddEnergy() 
             => _effectSystem.TryApplyOrCreateEffect(Energy);
-        
+
         [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
         public void TryCreateOrAddAttack() 
             => _effectSystem.TryApplyOrCreateEffect(Attack);
-        
+
         [Button(ButtonSizes.Large, Icon = SdfIconType.ArrowUp)]
         public void TryCreateOrAddMoney() 
             => _effectSystem.TryApplyOrCreateEffect(Money);
-        
+
         [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
             IconAlignment = IconAlignment.LeftOfText )]
         public void RemoveEnergy() 
             => _effectSystem.TryRemoveEffect(Energy);
-        
+
         [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
             IconAlignment = IconAlignment.LeftOfText )]
         public void RemoveAttack() 
             => _effectSystem.TryRemoveEffect(Attack);
-        
+
         [Button(ButtonSizes.Large, Icon = SdfIconType.Backspace,
             IconAlignment = IconAlignment.LeftOfText )]
         public void RemoveMoney() 

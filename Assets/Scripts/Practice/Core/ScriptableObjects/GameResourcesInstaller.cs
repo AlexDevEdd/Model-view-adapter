@@ -9,9 +9,11 @@ namespace Practice.Core.ScriptableObjects
         [SerializeField] private GameResources _gameResources;
         
         public override void InstallBindings()
-            => Container.BindInterfacesAndSelfTo<GameResources>()
+        {
+            Container.BindInterfacesAndSelfTo<GameResources>()
                 .FromInstance(_gameResources)
                 .AsSingle()
                 .NonLazy();
+        }
     }
 }

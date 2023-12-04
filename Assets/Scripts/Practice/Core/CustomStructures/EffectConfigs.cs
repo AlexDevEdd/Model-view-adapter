@@ -11,6 +11,8 @@ namespace Practice.Core.CustomStructures
         public List<EffectConfig> Configs;
         
         public EffectConfig GetConfigByType(EffectType type)
-            => Configs.FirstOrDefault(e => e.Type == type);
+        {
+            return Configs.FirstOrDefault(e => e.Type == type);
+        }
     }
 }
